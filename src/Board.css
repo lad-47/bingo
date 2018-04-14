@@ -1,0 +1,31 @@
+.flex-container {
+    padding: 10px;
+    height: 800px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-container div:nth-of-type(-n+12) {
+    order: -1;
+}
+
+@media all and (max-width: 700px) {
+    .flex-container {
+        height: 700px;
+    }
+}
+@media all and (max-width: 600px) {
+    .flex-container {
+        height: 600px;
+    }
+}
+@media all and (max-width: 500px) {
+    .flex-container {
+        height: 500px;
+    }
+}
+@media all and (max-width: 400px) {
+    .flex-container {
+        height: 400px;
+    }
+}

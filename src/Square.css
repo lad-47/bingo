@@ -1,0 +1,17 @@
+.Square {
+    height: 20%;
+    width: 20%;
+    background-color: gray;
+    border: 1px solid black;
+}
+
+#free-space {
+    height: 20%;
+    width: 20%;
+    order: -1;
+}
+
+#free-space > .Square{
+    width: 100%;
+    height: 100%;
+}

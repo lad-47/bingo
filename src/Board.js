@@ -20,8 +20,9 @@ class Board extends Component {
     render() {
         return (
             <div className="Board">
-                <ul>
+                <ul className="flex-container">
                     {this.props.fields.map((field, index) => <Square key={field+" "+index} field={field} index={index} handleUpdate={this.handleChange}/>)}
+                    <div id="free-space"><Square key={25} field="Free" handleUpdate={this.handleChange}/></div>
                 </ul>
             </div>
         );
