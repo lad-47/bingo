@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Jumbotron, Button } from 'react-bootstrap';
+import { Jumbotron, Button } from 'reactstrap';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './Home.css';
 
@@ -14,7 +14,7 @@ class Home extends Component {
                     </p>
                     <p>
                         <Link to="/form">
-                            <Button bsStyle="primary">Create a board</Button>
+                            <Button color="primary">Create a board</Button>
                         </Link>
                     </p>
                 </Jumbotron>

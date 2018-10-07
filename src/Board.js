@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Navbar } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './Board.css';
 import Square from './Square.js';
 
@@ -13,16 +11,18 @@ class Board extends Component {
 
     handleChange(index) {
         const fields = this.props.fields.slice();
-        fields[index] = "X";
-        this.props.handleUpdate(fields);
+        const clicked = this.props.clicked.slice();
+        // fields[index] = "X";
+        clicked[index]=!clicked[index];
+        this.props.handleUpdate(fields,clicked);
     }
 
     render() {
         return (
             <div className="Board">
                 <ul className="flex-container">
-                    {this.props.fields.map((field, index) => <Square key={field+" "+index} field={field} index={index} handleUpdate={this.handleChange}/>)}
-                    <div id="free-space"><Square key={25} field="Free" handleUpdate={this.handleChange}/></div>
+                    {this.props.fields.map((field, index) => <Square key={field+" "+index} field={field} index={index} clicked={this.props.clicked[index]} handleUpdate={this.handleChange}/>)}
+                    <div id="free-space"><Square key={25} field="Free" handleUpdate={this.handleChange} clicked/></div>
                 </ul>
             </div>
         );

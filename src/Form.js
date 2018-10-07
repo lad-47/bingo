@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { FormGroup, ControlLabel, FormControl, HelpBlock, Col, Button, ButtonGroup, Glyphicon, ProgressBar } from 'react-bootstrap';
+import { ButtonGroup, Button, FormGroup, FormFeedback, Label, Input, Progress } from 'reactstrap';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowAltCircleRight, faArrowAltCircleLeft, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import './Form.css';
 
-class Form extends Component {
+library.add(faArrowAltCircleRight, faArrowAltCircleLeft, faCheckCircle);
+
+class BingoForm extends Component {
     constructor(props, context) {
         super(props, context);
 
@@ -29,7 +34,7 @@ class Form extends Component {
         this.setState({
             rightDisabled: rightDisabled,
         });
-        this.props.handleUpdate(fields);
+        this.props.handleUpdate(fields, this.props.clicked);
     }
 
     handleLeftClick() {
@@ -56,34 +61,33 @@ class Form extends Component {
     }
 
     handleSubmit(e) {
+        e.preventDefault();
         if (this.state.currentStep < 23) {
             this.handleRightClick();
-        } 
-        e.preventDefault();
+        } else {
+            this.props.history.push('/board')
+        }
     }
 
     render() {
         return (
             <div className="Form">
-                <ProgressBar active now={this.state.currentProgress} />
+                <Progress color="success" value={this.state.currentProgress} />
                 <form onSubmit={this.handleSubmit}>
-                    <FormGroup
-                        controlId="formBasicText"
-                        validationState={this.getValidationState()}
-                    >
-                        <ControlLabel>Working example with validation</ControlLabel>
-                        <FormControl
+                    <FormGroup>
+                        <Label>Enter your bingo fields</Label>
+                        <Input
                             type="text"
                             value={this.props.fields[this.state.currentStep]}
                             placeholder="Enter text"
                             onChange={this.handleChange}
                             autoFocus
                         />
-                        <FormControl.Feedback />
+                        <FormFeedback />
                     </FormGroup>
                     <ButtonGroup>
                         <Button disabled={this.state.leftDisabled} onClick={() => this.handleLeftClick()}>
-                            <Glyphicon glyph="circle-arrow-left" />
+                            <FontAwesomeIcon icon="arrow-alt-circle-left" />
                         </Button>
                         <Next currentStep={this.state.currentStep} rightDisabled={this.state.rightDisabled} onClick={this.handleRightClick} />
                     </ButtonGroup>
@@ -96,18 +100,18 @@ class Form extends Component {
 function Next(props) {
     if (props.currentStep === 23) {
         return (
-            <Link to="/board">
+            <Link to="./board">
                 <Button disabled={props.rightDisabled} onClick={props.onClick}>
-                    <Glyphicon glyph="ok" />
+                    <FontAwesomeIcon icon="check-circle" />
                 </Button>
             </Link>
         );
     }
     return (
         <Button disabled={props.rightDisabled} onClick={props.onClick}>
-            <Glyphicon glyph="circle-arrow-right" />
+            <FontAwesomeIcon icon="arrow-alt-circle-right" />
         </Button>
     );
 }
 
-export default Form;
+export default BingoForm;

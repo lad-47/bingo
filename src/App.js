@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { Navbar } from 'react-bootstrap';
+import {
+  Collapse,
+  Navbar,
+  // NavbarToggler,
+  NavbarBrand} from 'reactstrap';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
 import Home from './Home.js';
-import Form from './Form.js';
+import BingoForm from './Form.js';
 import Board from './Board.js';
 
 class App extends Component {
@@ -14,12 +18,14 @@ class App extends Component {
 
     this.state = {
       fields: Array(24).fill(""),
+      clicked: Array(24).fill(false)
     }
   }
 
-  handleChange(fields) {
+  handleChange(fields, clicked) {
     this.setState({
       fields: fields,
+      clicked: clicked
     });
   }
 
@@ -27,24 +33,21 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Navbar inverse collapseOnSelect>
-            <Navbar.Header>
-              <Navbar.Brand>
-                <a href="/">Bingo</a>
-              </Navbar.Brand>
-              <Navbar.Toggle />
-            </Navbar.Header>
-            <Navbar.Collapse>
-            </Navbar.Collapse>
+          <Navbar light>
+              <NavbarBrand href="/">Bingo
+              </NavbarBrand>
+              {/* <NavbarToggler /> */}
+            <Collapse>
+            </Collapse>
           </Navbar>
           <Route exact path="/" component={Home} />
           <Route
             path='/form'
-            render={(props) => <Form {...props} fields={this.state.fields} handleUpdate={this.handleChange}/>}
+            render={(props) => <BingoForm {...props} fields={this.state.fields} clicked={this.state.clicked} handleUpdate={this.handleChange}/>}
           />
           <Route
             path='/board'
-            render={(props) => <Board {...props} fields={this.state.fields} handleUpdate={this.handleChange}/>}
+            render={(props) => <Board {...props} fields={this.state.fields} clicked={this.state.clicked} handleUpdate={this.handleChange}/>}
           />
         </div>
       </Router>

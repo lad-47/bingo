@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Navbar } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './Square.css';
 
 class Square extends Component {
@@ -16,8 +14,8 @@ class Square extends Component {
 
     render() {
         return (
-            <div className="Square" onClick={this.handleChange} >
-                {this.props.field}
+            <div className={"Square "+(this.props.clicked ? 'clicked' : 'unclicked')} onClick={this.handleChange} >
+                <p className="fieldValue">{this.props.field}</p>
             </div>
         );
     }

@@ -1,0 +1,11 @@
+.Form {
+    margin: auto;
+    width: 50%;
+}
+
+
+@media all and (max-width: 400px) {
+    .Form {
+        width: 80%;
+    }
+}
