@@ -8,6 +8,7 @@
   },
   "main": "index.js",
   "scripts": {
+    "postinstall": "npm run build",
     "start": "node index.js",
     "test": "node test.js",
     "start:react": "react-scripts start",
